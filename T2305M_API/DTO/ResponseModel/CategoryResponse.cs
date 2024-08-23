@@ -6,8 +6,8 @@ namespace T2305M_API.DTO.ResponseModel
 	{
 		public CategoryResponse(Category category)
 		{
-			//id = category.Id;
-			//name = category.Name;
+			id = category.CategoryId;
+			name = category.Name;
 		}
 
 		public int id { get; set; }

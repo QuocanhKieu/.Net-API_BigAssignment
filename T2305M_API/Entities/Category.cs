@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 
-namespace T2305M_API.Entities;
+using System.ComponentModel.DataAnnotations;
 
-public class Category
+namespace T2305M_API.Entities
 {
-    public int CategoryId { get; set; } // Primary Key
-    public string CategoryName { get; set; }
-    public string Description { get; set; }
-    public ICollection<Article> Articles { get; set; }
-    public ICollection<Artifact> Artifacts { get; set; }
-    public ICollection<Exhibition> Exhibitions { get; set; }
-    public ICollection<NationalHistory> NationalHistories { get; set; }
-    public ICollection<Sport> Sports { get; set; }
-    public ICollection<Art> Arts { get; set; }
-}
+    public class Category
+    {
+        [Key] // Specifies the primary key
+        public int CategoryId { get; set; }
 
+        [Required(ErrorMessage = "Name is required.")]
+        [StringLength(100, ErrorMessage = "Name cannot exceed 100 characters.")]
+        public string Name { get; set; }
+
+        [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters.")]
+        public string? Description { get; set; }
+    }
+
+}

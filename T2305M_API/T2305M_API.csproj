@@ -36,5 +36,6 @@
     <Folder Include="DTO\ResponseModel\" />
     <Folder Include="DTO\RequestModel\" />
     <Folder Include="DTO\RequestModel\Category\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

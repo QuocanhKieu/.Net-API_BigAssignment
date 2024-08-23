@@ -10,7 +10,7 @@ builder.Services.AddDbContext<T2305M_MVC.Entities.DataContext>(
     options=> options.UseSqlServer(connectionString)
     );
 //end
-
+builder.Services.AddScoped<SearchService>();  /
 // session
 builder.Services.AddDistributedMemoryCache();
 
