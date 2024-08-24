@@ -16,7 +16,7 @@ public partial class T2305mApiContext : DbContext
     {
     }
 
-    public virtual DbSet<Category> Categories { get; set; }
+    public DbSet<Category> Categories { get; set; }
     public DbSet<Art> Art { get; set; }
     public DbSet<Book> Book { get; set; }
     public DbSet<Creator> Creator { get; set; }
