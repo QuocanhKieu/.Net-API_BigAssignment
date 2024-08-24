@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using T2305M_API.Models;
 
+
 namespace T2305M_API.Services
 {
     public class SearchService
@@ -24,7 +25,7 @@ namespace T2305M_API.Services
             IQueryable<Culture> cultures = _context.Culture.Include(c => c.Creator);
             IQueryable<Exhibition> exhibitions = _context.Exhibition.Include(e => e.Creator);
             IQueryable<Book> books = _context.Book.Include(b => b.Creator);
-            IQueryable<Article> articles = _context.Article.Include(a => a.Creator);
+            //IQueryable<Article> articles = _context.Article.Include(a => a.Creator);
 
             // Apply query filter
             if (!string.IsNullOrEmpty(parameters.Query))
@@ -58,10 +59,10 @@ namespace T2305M_API.Services
                                           b.Description.ToLower().Contains(query) ||
                                           b.Creator.Name.ToLower().Contains(query));
 
-                articles = articles.Where(a => a.Title.ToLower().Contains(query) ||
-                                                a.Content.ToLower().Contains(query) ||
-                                                a.Description.ToLower().Contains(query) ||
-                                                a.Creator.Name.ToLower().Contains(query));
+                //articles = articles.Where(a => a.Title.ToLower().Contains(query) ||
+                //                                a.Content.ToLower().Contains(query) ||
+                //                                a.Description.ToLower().Contains(query) ||
+                //                                a.Creator.Name.ToLower().Contains(query));
             }
 
             // Apply date range filter
@@ -73,7 +74,7 @@ namespace T2305M_API.Services
                 cultures = cultures.Where(c => c.CreatedAt >= parameters.StartDate.Value);
                 exhibitions = exhibitions.Where(e => e.StartDate >= parameters.StartDate.Value);
                 books = books.Where(b => b.CreatedAt >= parameters.StartDate.Value);
-                articles = articles.Where(a => a.CreatedAt >= parameters.StartDate.Value);
+                //articles = articles.Where(a => a.CreatedAt >= parameters.StartDate.Value);
             }
 
             if (parameters.EndDate.HasValue)
@@ -84,7 +85,7 @@ namespace T2305M_API.Services
                 cultures = cultures.Where(c => c.CreatedAt <= parameters.EndDate.Value);
                 exhibitions = exhibitions.Where(e => e.EndDate <= parameters.EndDate.Value);
                 books = books.Where(b => b.CreatedAt <= parameters.EndDate.Value);
-                articles = articles.Where(a => a.CreatedAt <= parameters.EndDate.Value);
+                //articles = articles.Where(a => a.CreatedAt <= parameters.EndDate.Value);
             }
 
             // Apply sorting
@@ -96,7 +97,7 @@ namespace T2305M_API.Services
                 cultures = cultures.OrderByDescending(c => c.CreatedAt);
                 exhibitions = exhibitions.OrderByDescending(e => e.StartDate);
                 books = books.OrderByDescending(b => b.CreatedAt);
-                articles = articles.OrderByDescending(a => a.CreatedAt);
+                //articles = articles.OrderByDescending(a => a.CreatedAt);
             }
             else if (parameters.Sort == "latest")
             {
@@ -106,7 +107,7 @@ namespace T2305M_API.Services
                 cultures = cultures.OrderBy(c => c.CreatedAt);
                 exhibitions = exhibitions.OrderBy(e => e.StartDate);
                 books = books.OrderBy(b => b.CreatedAt);
-                articles = articles.OrderBy(a => a.CreatedAt);
+                //articles = articles.OrderBy(a => a.CreatedAt);
             }
 
             // Apply section filtering
@@ -116,7 +117,7 @@ namespace T2305M_API.Services
                 case "article":
                     searchResults = new
                     {
-                        Articles = await articles.ToListAsync()
+                        //Articles = await articles.ToListAsync()
                     };
                     break;
                 case "art":
@@ -159,7 +160,7 @@ namespace T2305M_API.Services
                         Cultures = await cultures.ToListAsync(),
                         Exhibitions = await exhibitions.ToListAsync(),
                         Books = await books.ToListAsync(),
-                        Articles = await articles.ToListAsync()
+                        //Articles = await articles.ToListAsync()
                     };
                     break;
             }

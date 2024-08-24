@@ -28,6 +28,12 @@ namespace T2305M_API.Entities
         public ICollection<Artifact>? Artifacts { get; set; } // Navigation property to Artifacts
         public ICollection<NationalEvent>? NationalEvents { get; set; } // Navigation property to National Events
         public ICollection<Exhibition>? Exhibitions { get; set; } // Navigation property to Exhibitions
-        public ICollection<Article>? Articles { get; set; } // Navigation property to Articles
+
+        public ICollection<CultureArticle>? CultureArticle { get; set; } // Navigation property to Articles
+        public ICollection<ArtifactArticle>? ArtifactArticle { get; set; } // Navigation property to Articles
+        public ICollection<BookArticle>? BookArticle { get; set; } // Navigation property to Articles
+        public ICollection<NationalEventArticle>? NationalEventArticle { get; set; } // Navigation property to Articles
+        public ICollection<ExhibitionArticle>? ExhibitionArticle { get; set; } // Navigation property to Articles
+        public ICollection<ArtArticle>? ArtArticle { get; set; } // Navigation property to Articles
     }
 }

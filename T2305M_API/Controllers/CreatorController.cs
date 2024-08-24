@@ -26,7 +26,7 @@ namespace T2305M_API.Controllers
                                  .Include(c => c.Artifacts)
                                  .Include(c => c.NationalEvents)
                                  .Include(c => c.Exhibitions)
-                                 .Include(c => c.Articles)
+                                 //.Include(c => c.Articles)
                                  .ToListAsync();
         }
 
@@ -41,7 +41,7 @@ namespace T2305M_API.Controllers
                                         .Include(c => c.Artifacts)
                                         .Include(c => c.NationalEvents)
                                         .Include(c => c.Exhibitions)
-                                        .Include(c => c.Articles)
+                                        //.Include(c => c.Articles)
                                         .FirstOrDefaultAsync(c => c.CreatorId == id);
 
             if (creator == null)
