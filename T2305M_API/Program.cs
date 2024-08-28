@@ -46,4 +46,21 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Data seeding section
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetService<T2305mApiContext>();
+
+    if (context != null)
+    {
+        DatabaseSeeder.Seed(context);
+    }
+    else
+    {
+        // Log an error or handle the situation where the context is null
+        throw new InvalidOperationException("T2305mApiContext is not available.");
+    }
+}
+
+
 app.Run();

@@ -16,17 +16,24 @@ public partial class T2305mApiContext : DbContext
     {
     }
 
-    public DbSet<Category> Categories { get; set; }
-    public DbSet<Art> Art { get; set; }
-    public DbSet<Book> Book { get; set; }
     public DbSet<Creator> Creator { get; set; }
-    //public DbSet<Article> Article { get; set; }
-    //public DbSet<ArticleImage> ArticleImage { get; set; }
-    public DbSet<Exhibition> Exhibition { get; set; }
-    public DbSet<Culture> Culture { get; set; }
-    public DbSet<Artifact> Artifact { get; set; }
+    public DbSet<Category> Category { get; set; }
+    public DbSet<NationalEventArticleImage> NationalEventArticleImage { get; set; }
+    public DbSet<NationalEventImage> NationalEventImage { get; set; }
+    public DbSet<NationalEventArticle> NationalEventArticle { get; set; }
     public DbSet<NationalEvent> NationalEvent { get; set; }
-    //public DbSet<EntityImage> EntityImage { get; set; }
+    public DbSet<ExhibitionImage> ExhibitionImage { get; set; }
+    public DbSet<ExhibitionArticleImage> ExhibitionArticleImage { get; set; }
+    public DbSet<ExhibitionArticle> ExhibitionArticle { get; set; }
+    public DbSet<Exhibition> Exhibition { get; set; }
+    public DbSet<CultureImage> CultureImage { get; set; }
+    public DbSet<CultureArticleImage> CultureArticleImage { get; set; }
+    public DbSet<CultureArticle> CultureArticle { get; set; }
+    public DbSet<Culture> Culture { get; set; }
+    public DbSet<ArtifactImage> ArtifactImage { get; set; }
+    public DbSet<ArtifactArticleImage> ArtifactArticleImage { get; set; }
+    public DbSet<ArtifactArticle> ArtifactArticle { get; set; }
+    public DbSet<Artifact> Artifact { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.

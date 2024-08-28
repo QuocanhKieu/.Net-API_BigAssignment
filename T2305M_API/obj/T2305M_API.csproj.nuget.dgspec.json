@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\KieuQuocAnh\\Desktop\\New folder (3)\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj": {}
+    "C:\\Users\\kieuquocanh\\Desktop\\MouseWithoutBorders\\.Net-API_BigAssignment\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\KieuQuocAnh\\Desktop\\New folder (3)\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj": {
+    "C:\\Users\\kieuquocanh\\Desktop\\MouseWithoutBorders\\.Net-API_BigAssignment\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\KieuQuocAnh\\Desktop\\New folder (3)\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj",
+        "projectUniqueName": "C:\\Users\\kieuquocanh\\Desktop\\MouseWithoutBorders\\.Net-API_BigAssignment\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj",
         "projectName": "T2305M_API",
-        "projectPath": "C:\\Users\\KieuQuocAnh\\Desktop\\New folder (3)\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj",
-        "packagesPath": "C:\\Users\\KieuQuocAnh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\KieuQuocAnh\\Desktop\\New folder (3)\\.Net-API_BigAssignment\\T2305M_API\\obj\\",
+        "projectPath": "C:\\Users\\kieuquocanh\\Desktop\\MouseWithoutBorders\\.Net-API_BigAssignment\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj",
+        "packagesPath": "C:\\Users\\kieuquocanh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kieuquocanh\\Desktop\\MouseWithoutBorders\\.Net-API_BigAssignment\\.Net-API_BigAssignment\\T2305M_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\KieuQuocAnh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kieuquocanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,6 +46,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[35.6.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.7, )"
@@ -98,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

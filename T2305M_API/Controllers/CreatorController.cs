@@ -20,9 +20,7 @@ namespace T2305M_API.Controllers
         public async Task<ActionResult<IEnumerable<Creator>>> GetCreator()
         {
             return await _context.Creator
-                                 .Include(c => c.Arts)
                                  .Include(c => c.Cultures)
-                                 .Include(c => c.Books)
                                  .Include(c => c.Artifacts)
                                  .Include(c => c.NationalEvents)
                                  .Include(c => c.Exhibitions)
@@ -35,9 +33,7 @@ namespace T2305M_API.Controllers
         public async Task<ActionResult<Creator>> GetCreator(int id)
         {
             var creator = await _context.Creator
-                                        .Include(c => c.Arts)
                                         .Include(c => c.Cultures)
-                                        .Include(c => c.Books)
                                         .Include(c => c.Artifacts)
                                         .Include(c => c.NationalEvents)
                                         .Include(c => c.Exhibitions)

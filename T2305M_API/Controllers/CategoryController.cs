@@ -19,7 +19,7 @@ namespace T2305M_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            var categories = await _context.Categories.ToListAsync();
+            var categories = await _context.Category.ToListAsync();
             return Ok(categories);
         }
 
@@ -27,7 +27,7 @@ namespace T2305M_API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Category.FindAsync(id);
 
             if (category == null)
             {
@@ -46,7 +46,7 @@ namespace T2305M_API.Controllers
                 return BadRequest(new { message = "Invalid data", errors = ModelState.Values.SelectMany(v => v.Errors) });
             }
 
-            _context.Categories.Add(category);
+            _context.Category.Add(category);
 
             try
             {
@@ -105,13 +105,13 @@ namespace T2305M_API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Category.FindAsync(id);
             if (category == null)
             {
                 return NotFound(new { message = $"Category with ID {id} not found." });
             }
 
-            _context.Categories.Remove(category);
+            _context.Category.Remove(category);
 
             try
             {
@@ -128,7 +128,8 @@ namespace T2305M_API.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            return _context.Category.Any(e => e.CategoryId == id);
         }
     }
 }
+    

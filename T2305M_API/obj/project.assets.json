@@ -46,6 +46,19 @@
           }
         }
       },
+      "Bogus/35.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Bogus.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Bogus.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer/2.14.1": {
         "type": "package",
         "dependencies": {
@@ -3999,6 +4012,25 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "Bogus/35.6.0": {
+      "sha512": "WiK99a8LedzzG7QbnJ1OZT02WZHjr8V6L+cmGJbuga7TtI+Whd+KFWNmVPtXKACFNjz2c/FIR6QDNJsHD6Eazg==",
+      "type": "package",
+      "path": "bogus/35.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bogus.35.6.0.nupkg.sha512",
+        "bogus.nuspec",
+        "lib/net40/Bogus.dll",
+        "lib/net40/Bogus.xml",
+        "lib/net6.0/Bogus.dll",
+        "lib/net6.0/Bogus.xml",
+        "lib/netstandard1.3/Bogus.dll",
+        "lib/netstandard1.3/Bogus.xml",
+        "lib/netstandard2.0/Bogus.dll",
+        "lib/netstandard2.0/Bogus.xml"
       ]
     },
     "Humanizer/2.14.1": {
@@ -11659,6 +11691,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Bogus >= 35.6.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.7",
       "Microsoft.EntityFrameworkCore >= 7.0.15",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.15",
@@ -11669,19 +11702,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\KieuQuocAnh\\.nuget\\packages\\": {}
+    "C:\\Users\\kieuquocanh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\KieuQuocAnh\\Desktop\\New folder (3)\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj",
+      "projectUniqueName": "C:\\Users\\kieuquocanh\\Desktop\\MouseWithoutBorders\\.Net-API_BigAssignment\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj",
       "projectName": "T2305M_API",
-      "projectPath": "C:\\Users\\KieuQuocAnh\\Desktop\\New folder (3)\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj",
-      "packagesPath": "C:\\Users\\KieuQuocAnh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\KieuQuocAnh\\Desktop\\New folder (3)\\.Net-API_BigAssignment\\T2305M_API\\obj\\",
+      "projectPath": "C:\\Users\\kieuquocanh\\Desktop\\MouseWithoutBorders\\.Net-API_BigAssignment\\.Net-API_BigAssignment\\T2305M_API\\T2305M_API.csproj",
+      "packagesPath": "C:\\Users\\kieuquocanh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kieuquocanh\\Desktop\\MouseWithoutBorders\\.Net-API_BigAssignment\\.Net-API_BigAssignment\\T2305M_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\KieuQuocAnh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kieuquocanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11713,6 +11746,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "Bogus": {
+            "target": "Package",
+            "version": "[35.6.0, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[7.0.7, )"
@@ -11765,7 +11802,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }

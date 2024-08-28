@@ -33,6 +33,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTO\ResponseModel\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

@@ -22,141 +22,6 @@ namespace T2305M_API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("T2305M_API.Entities.Art", b =>
-                {
-                    b.Property<int>("ArtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtId"));
-
-                    b.Property<string>("Artist")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Continent")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Country")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Period")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ThumbnailImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("ArtId");
-
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("Art");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.Article", b =>
-                {
-                    b.Property<int>("ArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleId"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("RelatedEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RelatedEntityType")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ThumbnailImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("ArticleId");
-
-                    b.HasIndex("CreatorId");
-
-                    b.HasIndex("RelatedEntityId");
-
-                    b.ToTable("Article");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ArticleImage", b =>
-                {
-                    b.Property<int>("ArticleImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticleImageId"));
-
-                    b.Property<int?>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ArticleImageId");
-
-                    b.HasIndex("ArticleId");
-
-                    b.ToTable("ArticleImage");
-                });
-
             modelBuilder.Entity("T2305M_API.Entities.Artifact", b =>
                 {
                     b.Property<int>("ArtifactId")
@@ -170,12 +35,10 @@ namespace T2305M_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Continent")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -185,12 +48,10 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DiscoveredDate")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -201,8 +62,7 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ArtifactId");
 
@@ -211,29 +71,20 @@ namespace T2305M_API.Migrations
                     b.ToTable("Artifact");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Book", b =>
+            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticle", b =>
                 {
-                    b.Property<int>("BookId")
+                    b.Property<int>("ArtifactArticleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtifactArticleId"));
 
-                    b.Property<string>("Author")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("ArtifactId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Continent")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Country")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -243,19 +94,10 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
-
-                    b.Property<string>("PublishedDate")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Publisher")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ThumbnailImage")
                         .IsRequired()
@@ -263,18 +105,60 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                    b.HasKey("ArtifactArticleId");
 
-                    b.HasKey("BookId");
+                    b.HasIndex("ArtifactId");
 
                     b.HasIndex("CreatorId");
 
-                    b.ToTable("Book");
+                    b.ToTable("ArtifactArticle");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticleImage", b =>
+                {
+                    b.Property<int>("ArtifactArticleImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtifactArticleImageId"));
+
+                    b.Property<int?>("ArtifactArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ArtifactArticleImageId");
+
+                    b.HasIndex("ArtifactArticleId");
+
+                    b.ToTable("ArtifactArticleImage");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ArtifactImage", b =>
+                {
+                    b.Property<int>("ArtifactImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtifactImageId"));
+
+                    b.Property<int?>("ArtifactId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("ArtifactImageId");
+
+                    b.HasIndex("ArtifactId");
+
+                    b.ToTable("ArtifactImage");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Category", b =>
@@ -286,17 +170,15 @@ namespace T2305M_API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Creator", b =>
@@ -307,28 +189,24 @@ namespace T2305M_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CreatorId"));
 
+                    b.Property<string>("Avatar")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Bio")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nationality")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CreatorId");
 
@@ -348,12 +226,10 @@ namespace T2305M_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Continent")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -363,8 +239,7 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -375,8 +250,7 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CultureId");
 
@@ -385,35 +259,90 @@ namespace T2305M_API.Migrations
                     b.ToTable("Culture");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.EntityImage", b =>
+            modelBuilder.Entity("T2305M_API.Entities.CultureArticle", b =>
                 {
-                    b.Property<int>("EntityImageId")
+                    b.Property<int>("CultureArticleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EntityImageId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CultureArticleId"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CultureId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ThumbnailImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CultureArticleId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("CultureId");
+
+                    b.ToTable("CultureArticle");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.CultureArticleImage", b =>
+                {
+                    b.Property<int>("CultureArticleImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CultureArticleImageId"));
+
+                    b.Property<int?>("CultureArticleId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int?>("RelatedEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RelatedEntityType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Thumbnail")
+                    b.HasKey("CultureArticleImageId");
+
+                    b.HasIndex("CultureArticleId");
+
+                    b.ToTable("CultureArticleImage");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.CultureImage", b =>
+                {
+                    b.Property<int>("CultureImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CultureImageId"));
+
+                    b.Property<int?>("CultureId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EntityImageId");
+                    b.HasKey("CultureImageId");
 
-                    b.HasIndex("RelatedEntityId");
+                    b.HasIndex("CultureId");
 
-                    b.ToTable("EntityImage");
+                    b.ToTable("CultureImage");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Exhibition", b =>
@@ -429,12 +358,10 @@ namespace T2305M_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Continent")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -444,8 +371,7 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
@@ -454,12 +380,10 @@ namespace T2305M_API.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Organizer")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
@@ -470,14 +394,99 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ExhibitionId");
 
                     b.HasIndex("CreatorId");
 
                     b.ToTable("Exhibition");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticle", b =>
+                {
+                    b.Property<int>("ExhibitionArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExhibitionArticleId"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ExhibitionId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ThumbnailImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ExhibitionArticleId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("ExhibitionId");
+
+                    b.ToTable("ExhibitionArticle");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticleImage", b =>
+                {
+                    b.Property<int>("ExhibitionArticleImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExhibitionArticleImageId"));
+
+                    b.Property<int>("ExhibitionArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ExhibitionArticleImageId");
+
+                    b.HasIndex("ExhibitionArticleId");
+
+                    b.ToTable("ExhibitionArticleImage");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ExhibitionImage", b =>
+                {
+                    b.Property<int>("ExhibitionImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExhibitionImageId"));
+
+                    b.Property<int>("ExhibitionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ExhibitionImageId");
+
+                    b.HasIndex("ExhibitionId");
+
+                    b.ToTable("ExhibitionImage");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.NationalEvent", b =>
@@ -492,6 +501,12 @@ namespace T2305M_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Continent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -500,14 +515,16 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
@@ -518,8 +535,7 @@ namespace T2305M_API.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NationalEventID");
 
@@ -528,195 +544,269 @@ namespace T2305M_API.Migrations
                     b.ToTable("NationalEvent");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Art", b =>
+            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticle", b =>
                 {
-                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("Arts")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                    b.Property<int>("NationalEventArticleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Creator");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NationalEventArticleId"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("NationalEventID")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ThumbnailImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NationalEventArticleId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("NationalEventID");
+
+                    b.ToTable("NationalEventArticle");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Article", b =>
+            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticleImage", b =>
                 {
-                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("Articles")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("NationalEventArticleImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("T2305M_API.Entities.Art", "Art")
-                        .WithMany("ArtArticles")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_Article_Art_RelatedEntityId");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NationalEventArticleImageId"));
 
-                    b.HasOne("T2305M_API.Entities.Artifact", "Artifact")
-                        .WithMany("ArtifactArticles")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_Article_Artifact_RelatedEntityId");
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasOne("T2305M_API.Entities.Book", "Book")
-                        .WithMany("BookArticles")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_Article_Book_RelatedEntityId");
+                    b.Property<int?>("NationalEventArticleId")
+                        .HasColumnType("int");
 
-                    b.HasOne("T2305M_API.Entities.Culture", "Culture")
-                        .WithMany("CultureArticles")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_Article_Culture_RelatedEntityId");
+                    b.HasKey("NationalEventArticleImageId");
 
-                    b.HasOne("T2305M_API.Entities.Exhibition", "Exhibition")
-                        .WithMany("ExhibitionArticles")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_Article_Exhibition_RelatedEntityId");
+                    b.HasIndex("NationalEventArticleId");
 
-                    b.HasOne("T2305M_API.Entities.NationalEvent", "NationalEvent")
-                        .WithMany("NationalEventArticles")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_Article_NationalEvent_RelatedEntityId");
-
-                    b.Navigation("Art");
-
-                    b.Navigation("Artifact");
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Creator");
-
-                    b.Navigation("Culture");
-
-                    b.Navigation("Exhibition");
-
-                    b.Navigation("NationalEvent");
+                    b.ToTable("NationalEventArticleImage");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.ArticleImage", b =>
+            modelBuilder.Entity("T2305M_API.Entities.NationalEventImage", b =>
                 {
-                    b.HasOne("T2305M_API.Entities.Article", "Article")
-                        .WithMany("ArticleImages")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("NationalEventImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Article");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NationalEventImageId"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NationalEventID")
+                        .HasColumnType("int");
+
+                    b.HasKey("NationalEventImageId");
+
+                    b.HasIndex("NationalEventID");
+
+                    b.ToTable("NationalEventImage");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Artifact", b =>
                 {
                     b.HasOne("T2305M_API.Entities.Creator", "Creator")
                         .WithMany("Artifacts")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CreatorId");
 
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Book", b =>
+            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticle", b =>
                 {
+                    b.HasOne("T2305M_API.Entities.Artifact", "Artifact")
+                        .WithMany("ArtifactArticles")
+                        .HasForeignKey("ArtifactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("Books")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithMany("ArtifactArticle")
+                        .HasForeignKey("CreatorId");
+
+                    b.Navigation("Artifact");
 
                     b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticleImage", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.ArtifactArticle", "ArtifactArticle")
+                        .WithMany("ArtifactArticleImages")
+                        .HasForeignKey("ArtifactArticleId");
+
+                    b.Navigation("ArtifactArticle");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ArtifactImage", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.Artifact", "Artifact")
+                        .WithMany("ArtifactImages")
+                        .HasForeignKey("ArtifactId");
+
+                    b.Navigation("Artifact");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Culture", b =>
                 {
                     b.HasOne("T2305M_API.Entities.Creator", "Creator")
                         .WithMany("Cultures")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CreatorId");
 
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.EntityImage", b =>
+            modelBuilder.Entity("T2305M_API.Entities.CultureArticle", b =>
                 {
-                    b.HasOne("T2305M_API.Entities.Art", "Art")
-                        .WithMany("ArtImages")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_EntityImage_Art_RelatedEntityId");
-
-                    b.HasOne("T2305M_API.Entities.Artifact", "Artifact")
-                        .WithMany("ArtifactImages")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_EntityImage_Artifact_RelatedEntityId");
-
-                    b.HasOne("T2305M_API.Entities.Book", "Book")
-                        .WithMany("BookImages")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_EntityImage_Book_RelatedEntityId");
+                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
+                        .WithMany("CultureArticle")
+                        .HasForeignKey("CreatorId");
 
                     b.HasOne("T2305M_API.Entities.Culture", "Culture")
-                        .WithMany("CultureImages")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_EntityImage_Culture_RelatedEntityId");
+                        .WithMany("CultureArticles")
+                        .HasForeignKey("CultureId");
 
-                    b.HasOne("T2305M_API.Entities.Exhibition", "Exhibition")
-                        .WithMany("ExhibitionImages")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_EntityImage_Exhibition_RelatedEntityId");
-
-                    b.HasOne("T2305M_API.Entities.NationalEvent", "NationalEvent")
-                        .WithMany("NationalEventImages")
-                        .HasForeignKey("RelatedEntityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_EntityImage_NationalEvent_RelatedEntityId");
-
-                    b.Navigation("Art");
-
-                    b.Navigation("Artifact");
-
-                    b.Navigation("Book");
+                    b.Navigation("Creator");
 
                     b.Navigation("Culture");
+                });
 
-                    b.Navigation("Exhibition");
+            modelBuilder.Entity("T2305M_API.Entities.CultureArticleImage", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.CultureArticle", "CultureArticle")
+                        .WithMany("CultureArticleImages")
+                        .HasForeignKey("CultureArticleId");
 
-                    b.Navigation("NationalEvent");
+                    b.Navigation("CultureArticle");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.CultureImage", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.Culture", "Culture")
+                        .WithMany("CultureImages")
+                        .HasForeignKey("CultureId");
+
+                    b.Navigation("Culture");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Exhibition", b =>
                 {
                     b.HasOne("T2305M_API.Entities.Creator", "Creator")
                         .WithMany("Exhibitions")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CreatorId");
 
                     b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticle", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
+                        .WithMany("ExhibitionArticle")
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("T2305M_API.Entities.Exhibition", "Exhibition")
+                        .WithMany("ExhibitionArticles")
+                        .HasForeignKey("ExhibitionId");
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("Exhibition");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticleImage", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.ExhibitionArticle", "ExhibitionArticle")
+                        .WithMany("ExhibitionArticleImages")
+                        .HasForeignKey("ExhibitionArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExhibitionArticle");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.ExhibitionImage", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.Exhibition", "Exhibition")
+                        .WithMany("ExhibitionImages")
+                        .HasForeignKey("ExhibitionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exhibition");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.NationalEvent", b =>
                 {
                     b.HasOne("T2305M_API.Entities.Creator", "Creator")
                         .WithMany("NationalEvents")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CreatorId");
 
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Art", b =>
+            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticle", b =>
                 {
-                    b.Navigation("ArtArticles");
+                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
+                        .WithMany("NationalEventArticle")
+                        .HasForeignKey("CreatorId");
 
-                    b.Navigation("ArtImages");
+                    b.HasOne("T2305M_API.Entities.NationalEvent", "NationalEvent")
+                        .WithMany("NationalEventArticles")
+                        .HasForeignKey("NationalEventID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("NationalEvent");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Article", b =>
+            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticleImage", b =>
                 {
-                    b.Navigation("ArticleImages");
+                    b.HasOne("T2305M_API.Entities.NationalEventArticle", "NationalEventArticle")
+                        .WithMany("NationalEventArticleImages")
+                        .HasForeignKey("NationalEventArticleId");
+
+                    b.Navigation("NationalEventArticle");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.NationalEventImage", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.NationalEvent", "NationalEvent")
+                        .WithMany("NationalEventImages")
+                        .HasForeignKey("NationalEventID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NationalEvent");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Artifact", b =>
@@ -726,26 +816,26 @@ namespace T2305M_API.Migrations
                     b.Navigation("ArtifactImages");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Book", b =>
+            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticle", b =>
                 {
-                    b.Navigation("BookArticles");
-
-                    b.Navigation("BookImages");
+                    b.Navigation("ArtifactArticleImages");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Creator", b =>
                 {
-                    b.Navigation("Articles");
+                    b.Navigation("ArtifactArticle");
 
                     b.Navigation("Artifacts");
 
-                    b.Navigation("Arts");
-
-                    b.Navigation("Books");
+                    b.Navigation("CultureArticle");
 
                     b.Navigation("Cultures");
 
+                    b.Navigation("ExhibitionArticle");
+
                     b.Navigation("Exhibitions");
+
+                    b.Navigation("NationalEventArticle");
 
                     b.Navigation("NationalEvents");
                 });
@@ -757,6 +847,11 @@ namespace T2305M_API.Migrations
                     b.Navigation("CultureImages");
                 });
 
+            modelBuilder.Entity("T2305M_API.Entities.CultureArticle", b =>
+                {
+                    b.Navigation("CultureArticleImages");
+                });
+
             modelBuilder.Entity("T2305M_API.Entities.Exhibition", b =>
                 {
                     b.Navigation("ExhibitionArticles");
@@ -764,11 +859,21 @@ namespace T2305M_API.Migrations
                     b.Navigation("ExhibitionImages");
                 });
 
+            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticle", b =>
+                {
+                    b.Navigation("ExhibitionArticleImages");
+                });
+
             modelBuilder.Entity("T2305M_API.Entities.NationalEvent", b =>
                 {
                     b.Navigation("NationalEventArticles");
 
                     b.Navigation("NationalEventImages");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticle", b =>
+                {
+                    b.Navigation("NationalEventArticleImages");
                 });
 #pragma warning restore 612, 618
         }

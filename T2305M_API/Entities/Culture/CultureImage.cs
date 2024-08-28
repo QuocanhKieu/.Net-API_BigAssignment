@@ -7,14 +7,10 @@ namespace T2305M_API.Entities
     {
         [Key]
         public int CultureImageId { get; set; }  // Primary Key
-
-        [Required]
-        [StringLength(255, ErrorMessage = "Image URL length can't be more than 255 characters.")]
         public string ImageUrl { get; set; }  // URL to the image
-
         [ForeignKey("Culture")]
-        public int CultureId { get; set; }  // Foreign Key to Culture
+        public int? CultureId { get; set; }  // Foreign Key to Culture
 
-        public Culture Culture { get; set; }  // Navigation property
+        public Culture? Culture { get; set; }  // Navigation property
     }
 }

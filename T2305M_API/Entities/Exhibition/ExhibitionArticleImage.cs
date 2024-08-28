@@ -7,14 +7,9 @@ namespace T2305M_API.Entities
     {
         [Key]
         public int ExhibitionArticleImageId { get; set; }  // Primary Key
-
-        [Required]
-        [StringLength(255, ErrorMessage = "Image URL length can't be more than 255 characters.")]
-        public string ImageUrl { get; set; }  // URL to the image
-
+        public string ImageUrl { get; set; }  // URL to the imag
         [ForeignKey("ExhibitionArticle")]
-        public int ExhibitionArticleId { get; set; }  // Foreign Key to ExhibitionArticle
-
+        public int ExhibitionArticleId { get; set; }  // Foreign Key to ExhibitionArticl
         public ExhibitionArticle ExhibitionArticle { get; set; }  // Navigation property
     }
 }

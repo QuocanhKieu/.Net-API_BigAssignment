@@ -9,36 +9,18 @@ namespace T2305M_API.Entities
     {
         [Key]
         public int ArtifactArticleId { get; set; }  // Primary Key
-
-        [Required]
-        [StringLength(100, ErrorMessage = "Title length can't be more than 100 characters.")]
         public string Title { get; set; }  // Title of the article
-
-        [Required]
         public string Content { get; set; }  // Content of the article
-
-        [Required]
-        [StringLength(255, ErrorMessage = "ThumbnailImage length can't be more than 255 characters.")]
-        public string ThumbnailImage { get; set; }  // Thumbnail for the Article
-
-        [Required]
-        [StringLength(200, ErrorMessage = "Description length can't be more than 200 characters.")]
-        public string Description { get; set; }  // Short description of the article
-
-        public bool IsActive { get; set; } = true;  // Indicates if the article is active
-
-        [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;  // Auto-set on creation
-
+        public string ThumbnailImage { get; set; }  
+        public string Description { get; set; }  
+        public bool IsActive { get; set; } = true; 
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;  
         [ForeignKey("Artifact")]
         public int ArtifactId { get; set; }  // Foreign Key to Artifact
-
         public Artifact Artifact { get; set; }  // Navigation property
-
+        [ForeignKey("Creator")]
         public int? CreatorId { get; set; }  // Foreign Key to Creator
-
         public Creator? Creator { get; set; }  // Navigation property
-
-        public ICollection<ArtifactArticleImage>? ArtifactArticleImages { get; set; }  // Navigation property to ArtifactArticleImages
+        public ICollection<ArtifactArticleImage>? ArtifactArticleImages { get; set; }  
     }
 }
