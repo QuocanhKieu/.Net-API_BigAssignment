@@ -18,22 +18,12 @@ public partial class T2305mApiContext : DbContext
 
     public DbSet<Creator> Creator { get; set; }
     public DbSet<Category> Category { get; set; }
-    public DbSet<NationalEventArticleImage> NationalEventArticleImage { get; set; }
-    public DbSet<NationalEventImage> NationalEventImage { get; set; }
-    public DbSet<NationalEventArticle> NationalEventArticle { get; set; }
-    public DbSet<NationalEvent> NationalEvent { get; set; }
-    public DbSet<ExhibitionImage> ExhibitionImage { get; set; }
-    public DbSet<ExhibitionArticleImage> ExhibitionArticleImage { get; set; }
-    public DbSet<ExhibitionArticle> ExhibitionArticle { get; set; }
-    public DbSet<Exhibition> Exhibition { get; set; }
-    public DbSet<CultureImage> CultureImage { get; set; }
-    public DbSet<CultureArticleImage> CultureArticleImage { get; set; }
-    public DbSet<CultureArticle> CultureArticle { get; set; }
+    public DbSet<Event> Event { get; set; }
     public DbSet<Culture> Culture { get; set; }
-    public DbSet<ArtifactImage> ArtifactImage { get; set; }
-    public DbSet<ArtifactArticleImage> ArtifactArticleImage { get; set; }
-    public DbSet<ArtifactArticle> ArtifactArticle { get; set; }
-    public DbSet<Artifact> Artifact { get; set; }
+    public DbSet<History> History { get; set; }
+    public DbSet<Book> Book { get; set; }
+    public DbSet<Tag> Tag { get; set; }
+    public DbSet<BookTag> BookTag { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -41,6 +31,19 @@ public partial class T2305mApiContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<BookTag>()
+        .HasKey(bt => new { bt.BookId, bt.TagId });
+
+        modelBuilder.Entity<Event>()
+        .Property(e => e.TicketPrice)
+        .HasPrecision(18, 2);
+
+        modelBuilder.Entity<Book>()
+        .Property(e => e.Price)
+        .HasPrecision(18, 2);
+
+
+        // Precision 18, Scale 2
         //// Art to Creator Relationship (One-to-Many)
         //modelBuilder.Entity<Art>()
         //    .HasOne(a => a.Creator)

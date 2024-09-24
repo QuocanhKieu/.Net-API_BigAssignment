@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using T2305M_API.Entities;
+using T2305M_API.Services.Implements;
 using T2305M_API.Services;
+using T2305M_API.Repositories.Implements;
+using T2305M_API.Repositories;
+//using T2305M_API.Services.Implements;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add CORS policy access
@@ -23,12 +27,27 @@ builder.Services.AddDbContext<T2305mApiContext>(
     options => options.UseSqlServer(T2305mApiContext.ConnectionString)
 );
 // Add services to the container.
-builder.Services.AddScoped<SearchService>(); 
+//builder.Services.AddScoped<SearchServiceImpl>(); 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ICultureRepository, CultureRepository>();
+builder.Services.AddScoped<ICultureService, CultureService>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<SearchServiceImpl>();
+builder.Services.AddScoped<IHistoryRepository, HistoryRepository>();
+builder.Services.AddScoped<IHistoryService, HistoryService>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ICreatorRepository, CreatorRepository>();
 
 var app = builder.Build();
 
@@ -41,12 +60,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-// Data seeding section
+//Data seeding section
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetService<T2305mApiContext>();

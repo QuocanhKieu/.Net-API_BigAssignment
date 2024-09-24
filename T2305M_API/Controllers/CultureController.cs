@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Net;
+using T2305M_API.DTO.Culture;
+using T2305M_API.DTO.Culture;
 using T2305M_API.Entities;
-
+using T2305M_API.Models;
+using T2305M_API.Services;
+using T2305M_API.Services.Implements;
 
 namespace T2305M_API.Controllers
 {
@@ -9,111 +13,121 @@ namespace T2305M_API.Controllers
     [ApiController]
     public class CultureController : ControllerBase
     {
-        private readonly T2305mApiContext _context;
+        private readonly ICultureService _cultureService;
 
-        public CultureController(T2305mApiContext context)
+        public CultureController(ICultureService cultureService)
         {
-            _context = context;
+            _cultureService = cultureService;
         }
 
-        // GET: api/Culture
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Culture>>> GetCulture()
+        public async Task<ActionResult> GetBasicCultureDTOs([FromQuery] CultureQueryParameters queryParameters)
         {
-            return await _context.Culture
-                                 .Include(c => c.CultureImages)
-                                 .Include(c => c.CultureArticles)
-                                 .Include(c => c.Creator)
-                                 .ToListAsync();
-        }
-
-        // GET: api/Culture/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Culture>> GetCulture(int id)
-        {
-            var culture = await _context.Culture
-                                        .Include(c => c.CultureImages)
-                                        .Include(c => c.CultureArticles)
-                                        .Include(c => c.Creator)
-                                        .FirstOrDefaultAsync(c => c.CultureId == id);
-
-            if (culture == null)
-            {
-                return NotFound();
-            }
-
-            return culture;
-        }
-
-        // POST: api/Culture
-        [HttpPost]
-        public async Task<ActionResult<Culture>> PostCulture(Culture culture)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Culture.Add(culture);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCulture), new { id = culture.CultureId }, culture);
-        }
-
-        // PUT: api/Culture/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCulture(int id, Culture culture)
-        {
-            if (id != culture.CultureId)
-            {
-                return BadRequest();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Entry(culture).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var paginatedResult = await _cultureService.GetBasicCultureDTOsAsync(queryParameters);
+                return Ok(new APIResponse<PaginatedResult<GetBasicCultureDTO>>(paginatedResult, "Retrieved paginated basic Cultures successfully."));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!CultureExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return StatusCode(500, new APIResponse<PaginatedResult<GetBasicCultureDTO>>(HttpStatusCode.InternalServerError, "Internal server error: " + ex.Message));
             }
-
-            return NoContent();
         }
 
-        // DELETE: api/Culture/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCulture(int id)
+        [HttpGet("{cultureId}")]
+        public async Task<ActionResult<GetDetailCultureDTO>> GetDetailCultureDTOById(int cultureId)
         {
-            var culture = await _context.Culture.FindAsync(id);
-            if (culture == null)
+            try
             {
-                return NotFound();
+                var detailCultureDTO = await _cultureService.GetDetailCultureDTOByIdAsync(cultureId);
+                if (detailCultureDTO == null)
+                {
+                    return NotFound(new APIResponse<GetDetailCultureDTO>(HttpStatusCode.NotFound, "DetailCulture not found.")); // Return 404 if not found
+                }
+                return Ok(detailCultureDTO); // Return the DTO
             }
-
-            _context.Culture.Remove(culture);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                return StatusCode(500, new APIResponse<GetDetailCultureDTO>(HttpStatusCode.InternalServerError, "Internal server error: " + ex.Message));
+            }
         }
 
-        private bool CultureExists(int id)
+        [HttpPost]
+        public async Task<IActionResult> CreateCulture([FromBody] CreateCultureDTO createCultureDTO)
         {
-            return _context.Culture.Any(e => e.CultureId == id);
+            try
+            {
+                var createCultureResponse = await _cultureService.CreateCultureAsync(createCultureDTO);
+
+                if (createCultureResponse.CultureId > 0)
+                {
+                    return Ok(new APIResponse<CreateCultureResponseDTO>(createCultureResponse, createCultureResponse.Message));
+                }
+
+                return StatusCode((int)HttpStatusCode.Conflict, new APIResponse<CreateCultureResponseDTO>(
+                    HttpStatusCode.Conflict, "Can not create Culture due to internal problems contact the backend."));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new APIResponse<CreateCultureResponseDTO>(
+                    HttpStatusCode.InternalServerError, "Internal server error: " + ex.Message));
+            }
         }
+
+        //// PUT: api/Article/{id}
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutArticle(int id, Article article)
+        //{
+        //    if (id != article.ArticleId)
+        //    {
+        //        return BadRequest("ID mismatch");
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    _context.Entry(article).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ArticleExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+
+        //// DELETE: api/Article/{id}
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteArticle(int id)
+        //{
+        //    var article = await _context.Article.FindAsync(id);
+        //    if (article == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _context.Article.Remove(article);
+        //    await _context.SaveChangesAsync();
+
+        //    return NoContent();
+        //}
+
+        //private bool ArticleExists(int id)
+        //{
+        //    return _context.Article.Any(e => e.ArticleId == id);
+        //}
     }
 }

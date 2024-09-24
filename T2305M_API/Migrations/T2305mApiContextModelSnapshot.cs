@@ -22,39 +22,42 @@ namespace T2305M_API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("T2305M_API.Entities.Artifact", b =>
+            modelBuilder.Entity("T2305M_API.Entities.Book", b =>
                 {
-                    b.Property<int>("ArtifactId")
+                    b.Property<int>("BookId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtifactId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"));
 
-                    b.Property<string>("Content")
+                    b.Property<string>("Author")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Continent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CopiesSold")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatorId")
+                    b.Property<int>("CreatorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DiscoveredDate")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<bool>("IsRecommended")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ThumbnailImage")
                         .IsRequired()
@@ -64,101 +67,29 @@ namespace T2305M_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ArtifactId");
-
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("Artifact");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticle", b =>
-                {
-                    b.Property<int>("ArtifactArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtifactArticleId"));
-
-                    b.Property<int>("ArtifactId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ThumbnailImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ArtifactArticleId");
-
-                    b.HasIndex("ArtifactId");
+                    b.HasKey("BookId");
 
                     b.HasIndex("CreatorId");
 
-                    b.ToTable("ArtifactArticle");
+                    b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticleImage", b =>
+            modelBuilder.Entity("T2305M_API.Entities.BookTag", b =>
                 {
-                    b.Property<int>("ArtifactArticleImageId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtifactArticleImageId"));
-
-                    b.Property<int?>("ArtifactArticleId")
+                    b.Property<int>("TagId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("BookId", "TagId");
 
-                    b.HasKey("ArtifactArticleImageId");
+                    b.HasIndex("TagId");
 
-                    b.HasIndex("ArtifactArticleId");
-
-                    b.ToTable("ArtifactArticleImage");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ArtifactImage", b =>
-                {
-                    b.Property<int>("ArtifactImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtifactImageId"));
-
-                    b.Property<int?>("ArtifactId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("ArtifactImageId");
-
-                    b.HasIndex("ArtifactId");
-
-                    b.ToTable("ArtifactImage");
+                    b.ToTable("BookTag");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Category", b =>
@@ -208,6 +139,10 @@ namespace T2305M_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CreatorId");
 
                     b.ToTable("Creator");
@@ -221,28 +156,32 @@ namespace T2305M_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CultureId"));
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Continent")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CreatorId")
+                    b.Property<int>("CreatorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Period")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ThumbnailImage")
                         .IsRequired()
@@ -259,114 +198,32 @@ namespace T2305M_API.Migrations
                     b.ToTable("Culture");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.CultureArticle", b =>
+            modelBuilder.Entity("T2305M_API.Entities.Event", b =>
                 {
-                    b.Property<int>("CultureArticleId")
+                    b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CultureArticleId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventId"));
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CultureId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ThumbnailImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CultureArticleId");
-
-                    b.HasIndex("CreatorId");
-
-                    b.HasIndex("CultureId");
-
-                    b.ToTable("CultureArticle");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.CultureArticleImage", b =>
-                {
-                    b.Property<int>("CultureArticleImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CultureArticleImageId"));
-
-                    b.Property<int?>("CultureArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CultureArticleImageId");
-
-                    b.HasIndex("CultureArticleId");
-
-                    b.ToTable("CultureArticleImage");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.CultureImage", b =>
-                {
-                    b.Property<int>("CultureImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CultureImageId"));
-
-                    b.Property<int?>("CultureId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CultureImageId");
-
-                    b.HasIndex("CultureId");
-
-                    b.ToTable("CultureImage");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.Exhibition", b =>
-                {
-                    b.Property<int>("ExhibitionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExhibitionId"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
+                    b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Continent")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatorId")
+                    b.Property<int>("CreatorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CurrentAttendees")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -376,19 +233,52 @@ namespace T2305M_API.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsHostOnline")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPromoted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MaxAttendees")
+                        .HasColumnType("int");
 
                     b.Property<string>("Organizer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("StartDate")
+                    b.Property<DateTime?>("SaleDueDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
                     b.Property<string>("ThumbnailImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("TicketPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TimeZone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -396,110 +286,26 @@ namespace T2305M_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ExhibitionId");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WebsiteUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EventId");
 
                     b.HasIndex("CreatorId");
 
-                    b.ToTable("Exhibition");
+                    b.ToTable("Event");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticle", b =>
+            modelBuilder.Entity("T2305M_API.Entities.History", b =>
                 {
-                    b.Property<int>("ExhibitionArticleId")
+                    b.Property<int>("HistoryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExhibitionArticleId"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ExhibitionId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ThumbnailImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ExhibitionArticleId");
-
-                    b.HasIndex("CreatorId");
-
-                    b.HasIndex("ExhibitionId");
-
-                    b.ToTable("ExhibitionArticle");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticleImage", b =>
-                {
-                    b.Property<int>("ExhibitionArticleImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExhibitionArticleImageId"));
-
-                    b.Property<int>("ExhibitionArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ExhibitionArticleImageId");
-
-                    b.HasIndex("ExhibitionArticleId");
-
-                    b.ToTable("ExhibitionArticleImage");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ExhibitionImage", b =>
-                {
-                    b.Property<int>("ExhibitionImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExhibitionImageId"));
-
-                    b.Property<int>("ExhibitionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ExhibitionImageId");
-
-                    b.HasIndex("ExhibitionId");
-
-                    b.ToTable("ExhibitionImage");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.NationalEvent", b =>
-                {
-                    b.Property<int>("NationalEventID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NationalEventID"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HistoryId"));
 
                     b.Property<string>("Continent")
                         .HasColumnType("nvarchar(max)");
@@ -507,373 +313,144 @@ namespace T2305M_API.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CreatorId")
+                    b.Property<int>("CreatorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ThumbnailImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("NationalEventID");
-
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("NationalEvent");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticle", b =>
-                {
-                    b.Property<int>("NationalEventArticleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NationalEventArticleId"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
+                    b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("NationalEventID")
+                    b.Property<string>("Period")
                         .IsRequired()
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ThumbnailImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TimeOrder")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("NationalEventArticleId");
+                    b.HasKey("HistoryId");
 
                     b.HasIndex("CreatorId");
 
-                    b.HasIndex("NationalEventID");
-
-                    b.ToTable("NationalEventArticle");
+                    b.ToTable("History");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticleImage", b =>
+            modelBuilder.Entity("T2305M_API.Entities.Tag", b =>
                 {
-                    b.Property<int>("NationalEventArticleImageId")
+                    b.Property<int>("TagId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NationalEventArticleImageId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagId"));
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NationalEventArticleId")
-                        .HasColumnType("int");
+                    b.HasKey("TagId");
 
-                    b.HasKey("NationalEventArticleImageId");
-
-                    b.HasIndex("NationalEventArticleId");
-
-                    b.ToTable("NationalEventArticleImage");
+                    b.ToTable("Tag");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.NationalEventImage", b =>
-                {
-                    b.Property<int>("NationalEventImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NationalEventImageId"));
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NationalEventID")
-                        .HasColumnType("int");
-
-                    b.HasKey("NationalEventImageId");
-
-                    b.HasIndex("NationalEventID");
-
-                    b.ToTable("NationalEventImage");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.Artifact", b =>
+            modelBuilder.Entity("T2305M_API.Entities.Book", b =>
                 {
                     b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("Artifacts")
-                        .HasForeignKey("CreatorId");
-
-                    b.Navigation("Creator");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticle", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Artifact", "Artifact")
-                        .WithMany("ArtifactArticles")
-                        .HasForeignKey("ArtifactId")
+                        .WithMany("Books")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("ArtifactArticle")
-                        .HasForeignKey("CreatorId");
-
-                    b.Navigation("Artifact");
-
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticleImage", b =>
+            modelBuilder.Entity("T2305M_API.Entities.BookTag", b =>
                 {
-                    b.HasOne("T2305M_API.Entities.ArtifactArticle", "ArtifactArticle")
-                        .WithMany("ArtifactArticleImages")
-                        .HasForeignKey("ArtifactArticleId");
+                    b.HasOne("T2305M_API.Entities.Book", "Book")
+                        .WithMany("BookTags")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ArtifactArticle");
-                });
+                    b.HasOne("T2305M_API.Entities.Tag", "Tag")
+                        .WithMany("BookTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("T2305M_API.Entities.ArtifactImage", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Artifact", "Artifact")
-                        .WithMany("ArtifactImages")
-                        .HasForeignKey("ArtifactId");
+                    b.Navigation("Book");
 
-                    b.Navigation("Artifact");
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Culture", b =>
                 {
                     b.HasOne("T2305M_API.Entities.Creator", "Creator")
                         .WithMany("Cultures")
-                        .HasForeignKey("CreatorId");
-
-                    b.Navigation("Creator");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.CultureArticle", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("CultureArticle")
-                        .HasForeignKey("CreatorId");
-
-                    b.HasOne("T2305M_API.Entities.Culture", "Culture")
-                        .WithMany("CultureArticles")
-                        .HasForeignKey("CultureId");
-
-                    b.Navigation("Creator");
-
-                    b.Navigation("Culture");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.CultureArticleImage", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.CultureArticle", "CultureArticle")
-                        .WithMany("CultureArticleImages")
-                        .HasForeignKey("CultureArticleId");
-
-                    b.Navigation("CultureArticle");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.CultureImage", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Culture", "Culture")
-                        .WithMany("CultureImages")
-                        .HasForeignKey("CultureId");
-
-                    b.Navigation("Culture");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.Exhibition", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("Exhibitions")
-                        .HasForeignKey("CreatorId");
-
-                    b.Navigation("Creator");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticle", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("ExhibitionArticle")
-                        .HasForeignKey("CreatorId");
-
-                    b.HasOne("T2305M_API.Entities.Exhibition", "Exhibition")
-                        .WithMany("ExhibitionArticles")
-                        .HasForeignKey("ExhibitionId");
-
-                    b.Navigation("Creator");
-
-                    b.Navigation("Exhibition");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticleImage", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.ExhibitionArticle", "ExhibitionArticle")
-                        .WithMany("ExhibitionArticleImages")
-                        .HasForeignKey("ExhibitionArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ExhibitionArticle");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ExhibitionImage", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Exhibition", "Exhibition")
-                        .WithMany("ExhibitionImages")
-                        .HasForeignKey("ExhibitionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Exhibition");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.NationalEvent", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("NationalEvents")
-                        .HasForeignKey("CreatorId");
-
-                    b.Navigation("Creator");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticle", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
-                        .WithMany("NationalEventArticle")
-                        .HasForeignKey("CreatorId");
-
-                    b.HasOne("T2305M_API.Entities.NationalEvent", "NationalEvent")
-                        .WithMany("NationalEventArticles")
-                        .HasForeignKey("NationalEventID")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Creator");
-
-                    b.Navigation("NationalEvent");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticleImage", b =>
+            modelBuilder.Entity("T2305M_API.Entities.Event", b =>
                 {
-                    b.HasOne("T2305M_API.Entities.NationalEventArticle", "NationalEventArticle")
-                        .WithMany("NationalEventArticleImages")
-                        .HasForeignKey("NationalEventArticleId");
-
-                    b.Navigation("NationalEventArticle");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.NationalEventImage", b =>
-                {
-                    b.HasOne("T2305M_API.Entities.NationalEvent", "NationalEvent")
-                        .WithMany("NationalEventImages")
-                        .HasForeignKey("NationalEventID")
+                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
+                        .WithMany("Events")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("NationalEvent");
+                    b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Artifact", b =>
+            modelBuilder.Entity("T2305M_API.Entities.History", b =>
                 {
-                    b.Navigation("ArtifactArticles");
+                    b.HasOne("T2305M_API.Entities.Creator", "Creator")
+                        .WithMany("Histories")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ArtifactImages");
+                    b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.ArtifactArticle", b =>
+            modelBuilder.Entity("T2305M_API.Entities.Book", b =>
                 {
-                    b.Navigation("ArtifactArticleImages");
+                    b.Navigation("BookTags");
                 });
 
             modelBuilder.Entity("T2305M_API.Entities.Creator", b =>
                 {
-                    b.Navigation("ArtifactArticle");
-
-                    b.Navigation("Artifacts");
-
-                    b.Navigation("CultureArticle");
+                    b.Navigation("Books");
 
                     b.Navigation("Cultures");
 
-                    b.Navigation("ExhibitionArticle");
+                    b.Navigation("Events");
 
-                    b.Navigation("Exhibitions");
-
-                    b.Navigation("NationalEventArticle");
-
-                    b.Navigation("NationalEvents");
+                    b.Navigation("Histories");
                 });
 
-            modelBuilder.Entity("T2305M_API.Entities.Culture", b =>
+            modelBuilder.Entity("T2305M_API.Entities.Tag", b =>
                 {
-                    b.Navigation("CultureArticles");
-
-                    b.Navigation("CultureImages");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.CultureArticle", b =>
-                {
-                    b.Navigation("CultureArticleImages");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.Exhibition", b =>
-                {
-                    b.Navigation("ExhibitionArticles");
-
-                    b.Navigation("ExhibitionImages");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.ExhibitionArticle", b =>
-                {
-                    b.Navigation("ExhibitionArticleImages");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.NationalEvent", b =>
-                {
-                    b.Navigation("NationalEventArticles");
-
-                    b.Navigation("NationalEventImages");
-                });
-
-            modelBuilder.Entity("T2305M_API.Entities.NationalEventArticle", b =>
-                {
-                    b.Navigation("NationalEventArticleImages");
+                    b.Navigation("BookTags");
                 });
 #pragma warning restore 612, 618
         }

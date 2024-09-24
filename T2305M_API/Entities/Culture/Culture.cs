@@ -1,27 +1,21 @@
-﻿using System.Collections.Generic;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace T2305M_API.Entities
 {
     public class Culture
     {
         [Key]
-        public int CultureId { get; set; }  // Primary Key
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Auto-set on creation
+        public int CultureId { get; set; }
         public string Title { get; set; }
-        public string ThumbnailImage { get; set; }  // Thumbnail for the Culture object
-        public string Content { get; set; }
+        public string ThumbnailImage { get; set; }
         public string Description { get; set; }
-        public bool IsActive { get; set; } = true; // Default to active
-        public string? Continent { get; set; }  // E.g., "Africa", "Asia", "Europe", etc.
-        public string? Country { get; set; }  // E.g., "USA", "China", etc.
-
-        // Collections
-        public ICollection<CultureImage>? CultureImages { get; set; }  // List of images related to the Culture object
-        public ICollection<CultureArticle>? CultureArticles { get; set; }  // Related articles
-        public int? CreatorId { get; set; }
-        public Creator? Creator { get; set; }  // Navigation property
+        public string Period { get; set; }
+        public string? Continent { get; set; }
+        public string? Country { get; set; }
+        public string CreatedAt { get; set; } = DateTime.UtcNow.ToString();
+        public bool IsActive { get; set; } = true;
+        public string? FileName { get; set; }
+        public int CreatorId { get; set; }
+        public Creator? Creator { get; set; }  // for include or eagerly load
     }
 }
