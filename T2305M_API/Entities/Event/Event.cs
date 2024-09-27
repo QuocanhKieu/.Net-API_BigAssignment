@@ -39,5 +39,7 @@ namespace T2305M_API.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public bool IsActive { get; set; } = true;
+        public ICollection<UserEvent>? UserEvents { get; set; }  // Navigation property for many-to-many 
+
     }
 }

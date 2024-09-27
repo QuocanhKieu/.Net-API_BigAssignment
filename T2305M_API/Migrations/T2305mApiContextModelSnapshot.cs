@@ -369,6 +369,52 @@ namespace T2305M_API.Migrations
                     b.ToTable("Tag");
                 });
 
+            modelBuilder.Entity("T2305M_API.Entities.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("UserEvent", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("UserEvent");
+                });
+
             modelBuilder.Entity("T2305M_API.Entities.Book", b =>
                 {
                     b.HasOne("T2305M_API.Entities.Creator", "Creator")
@@ -432,6 +478,25 @@ namespace T2305M_API.Migrations
                     b.Navigation("Creator");
                 });
 
+            modelBuilder.Entity("UserEvent", b =>
+                {
+                    b.HasOne("T2305M_API.Entities.Event", "Event")
+                        .WithMany("UserEvents")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("T2305M_API.Entities.User", "User")
+                        .WithMany("UserEvents")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("T2305M_API.Entities.Book", b =>
                 {
                     b.Navigation("BookTags");
@@ -448,9 +513,19 @@ namespace T2305M_API.Migrations
                     b.Navigation("Histories");
                 });
 
+            modelBuilder.Entity("T2305M_API.Entities.Event", b =>
+                {
+                    b.Navigation("UserEvents");
+                });
+
             modelBuilder.Entity("T2305M_API.Entities.Tag", b =>
                 {
                     b.Navigation("BookTags");
+                });
+
+            modelBuilder.Entity("T2305M_API.Entities.User", b =>
+                {
+                    b.Navigation("UserEvents");
                 });
 #pragma warning restore 612, 618
         }

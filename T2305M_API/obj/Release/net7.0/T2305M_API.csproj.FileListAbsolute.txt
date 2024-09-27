@@ -255,3 +255,5 @@ C:\Users\KieuQuocAnh\Desktop\MouseWithoutBorders\.Net-API_BigAssignment\.Net-API
 C:\Users\KieuQuocAnh\Desktop\MouseWithoutBorders\.Net-API_BigAssignment\.Net-API_BigAssignment\.Net-API_BigAssignment\T2305M_API\obj\Release\net7.0\T2305M_API.genruntimeconfig.cache
 C:\Users\KieuQuocAnh\Desktop\MouseWithoutBorders\.Net-API_BigAssignment\.Net-API_BigAssignment\.Net-API_BigAssignment\T2305M_API\obj\Release\net7.0\ref\T2305M_API.dll
 C:\Users\KieuQuocAnh\Desktop\MouseWithoutBorders\.Net-API_BigAssignment\.Net-API_BigAssignment\.Net-API_BigAssignment\T2305M_API\bin\Release\net7.0\T2305M_API.staticwebassets.runtime.json
+C:\Users\KieuQuocAnh\Desktop\MouseWithoutBorders\.Net-API_BigAssignment\.Net-API_BigAssignment\.Net-API_BigAssignment\T2305M_API\bin\Release\net7.0\BCrypt.Net-Next.dll
+C:\Users\KieuQuocAnh\Desktop\MouseWithoutBorders\.Net-API_BigAssignment\.Net-API_BigAssignment\.Net-API_BigAssignment\T2305M_API\bin\Release\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -24,6 +24,8 @@ public partial class T2305mApiContext : DbContext
     public DbSet<Book> Book { get; set; }
     public DbSet<Tag> Tag { get; set; }
     public DbSet<BookTag> BookTag { get; set; }
+    public DbSet<User> User { get; set; }
+    public DbSet<UserEvent> UserEvent { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -31,6 +33,9 @@ public partial class T2305mApiContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<UserEvent>()
+        .HasKey(ue => new { ue.UserId, ue.EventId});
+
         modelBuilder.Entity<BookTag>()
         .HasKey(bt => new { bt.BookId, bt.TagId });
 
